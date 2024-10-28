@@ -1,0 +1,38 @@
+{
+  "name": "@xavirn89/react-native-sidenav",
+  "version": "0.1.0",
+  "description": "A customizable SideNav component for React Native with TypeScript support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "react-native",
+    "sidenav",
+    "animated",
+    "typescript",
+    "react-native-navigation"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=16.8",
+    "react-native": ">=0.61",
+    "react-native-gesture-handler": "^2.3.2",
+    "react-native-reanimated": "^2.3.0",
+    "react-native-safe-area-context": "^3.3.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xavirn89/react-native-sidenav.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xavirn89/react-native-sidenav/issues"
+  },
+  "homepage": "https://github.com/xavirn89/react-native-sidenav#readme",
+  "author": "xavirn89",
+  "license": "MIT"
+}
