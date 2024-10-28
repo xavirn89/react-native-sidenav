@@ -1,5 +1,5 @@
 {
-  "name": "@xavirn89/react-native-sidenav",
+  "name": "@xavirn/react-native-sidenav",
   "version": "0.1.0",
   "description": "A customizable SideNav component for React Native with TypeScript support",
   "main": "dist/index.js",
@@ -27,12 +27,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xavirn89/react-native-sidenav.git"
+    "url": "git+https://github.com/xavirn89/react-native-sidenav.git"
   },
   "bugs": {
     "url": "https://github.com/xavirn89/react-native-sidenav/issues"
   },
   "homepage": "https://github.com/xavirn89/react-native-sidenav#readme",
   "author": "xavirn89",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }
