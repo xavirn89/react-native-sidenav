@@ -1,8 +1,31 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var react_1 = __importStar(require("react"));
 var react_native_1 = require("react-native");
-var react_native_reanimated_1 = require("react-native-reanimated");
+var react_native_reanimated_1 = __importStar(require("react-native-reanimated"));
 var react_native_safe_area_context_1 = require("react-native-safe-area-context");
 var react_native_gesture_handler_1 = require("react-native-gesture-handler");
 var SideNav = function (_a) {
@@ -40,16 +63,13 @@ var SideNav = function (_a) {
      * - Manages both position-based translation and fade effects
      * - When closed, opacity animation is delayed to allow slide-out to complete
      */
-    // @ts-ignore
     var animatedStyle = (0, react_native_reanimated_1.useAnimatedStyle)(function () {
         var translateXValue = position === 'left'
             ? (0, react_native_reanimated_1.withTiming)(state ? 0 : -screenWidth * (validatedWidth / 100), { duration: validatedDuration })
             : (0, react_native_reanimated_1.withTiming)(state ? 0 : screenWidth * (validatedWidth / 100), { duration: validatedDuration });
         return {
             transform: [{ translateX: translateXValue }],
-            opacity: state
-                ? (0, react_native_reanimated_1.withTiming)(1, { duration: 0 })
-                : (0, react_native_reanimated_1.withDelay)(validatedDuration, (0, react_native_reanimated_1.withTiming)(0, { duration: validatedDuration })),
+            opacity: (0, react_native_reanimated_1.withTiming)(state ? 1 : 0, { duration: validatedDuration }),
             pointerEvents: state ? 'auto' : 'none',
         };
     }, [state, validatedDuration, validatedWidth, position]);

@@ -89,7 +89,6 @@ const SideNav: React.FC<SideNavProps> = ({
    * - Manages both position-based translation and fade effects
    * - When closed, opacity animation is delayed to allow slide-out to complete
    */
-  // @ts-ignore
   const animatedStyle = useAnimatedStyle(() => {
     const translateXValue = position === 'left' 
       ? withTiming(state ? 0 : -screenWidth * (validatedWidth / 100), { duration: validatedDuration })
@@ -97,11 +96,9 @@ const SideNav: React.FC<SideNavProps> = ({
 
     return {
       transform: [{ translateX: translateXValue }],
-      opacity: state 
-        ? withTiming(1, { duration: 0 }) 
-        : withDelay(validatedDuration, withTiming(0, { duration: validatedDuration })),
+      opacity: withTiming(state ? 1 : 0, { duration: validatedDuration }),
       pointerEvents: state ? 'auto' : 'none', 
-    }
+    } as Animated.AnimateStyle<{}>
   }, [state, validatedDuration, validatedWidth, position])
 
   /**
@@ -111,7 +108,7 @@ const SideNav: React.FC<SideNavProps> = ({
   const overlayAnimatedStyle = useAnimatedStyle(() => ({
     opacity: withTiming(state ? validatedOverlayOpacity / 100 : 0, { duration: validatedDuration }),
     pointerEvents: state ? 'auto' : 'none' 
-  }), [state, validatedOverlayOpacity, validatedDuration])
+  } as Animated.AnimateStyle<{}>), [state, validatedOverlayOpacity, validatedDuration]) 
 
   return (
     <>
