@@ -112,25 +112,28 @@ const SideNav: React.FC<SideNavProps> = ({
 
   return (
     <View
-      style={StyleSheet.absoluteFill}
-      pointerEvents={state ? 'auto' : 'none'}
-      onTouchStart={(e) => {
-        const touch = e.nativeEvent;
-        const touchX = touch.pageX;
-        const sideNavWidth = (Dimensions.get('window').width * validatedWidth) / 100;
-        const touchIsOutsideSideNav = position === 'left'
-          ? touchX > sideNavWidth
-          : touchX < (Dimensions.get('window').width - sideNavWidth);
-
-        if (touchIsOutsideSideNav) {
-          onOutsidePress();
-        }
-      }}
+      style={[
+        StyleSheet.absoluteFill,
+        { pointerEvents: 'box-none' }
+      ]}
     >
       {/* Overlay background */}
       {overlay && (
         <Animated.View
           style={[overlayAnimatedStyle, styles.overlay]}
+          pointerEvents={state ? 'auto' : 'none'}
+          onTouchStart={(e) => {
+            const touch = e.nativeEvent;
+            const touchX = touch.pageX;
+            const sideNavWidth = (Dimensions.get('window').width * validatedWidth) / 100;
+            const touchIsOutsideSideNav = position === 'left'
+              ? touchX > sideNavWidth
+              : touchX < (Dimensions.get('window').width - sideNavWidth);
+
+            if (touchIsOutsideSideNav) {
+              onOutsidePress();
+            }
+          }}
         />
       )}
 
@@ -152,8 +155,12 @@ const SideNav: React.FC<SideNavProps> = ({
             animatedStyle as any,
             styles.sidebarContainer
           ]}
+          pointerEvents="box-none"
         >
-          <View style={[styles.sidebar, { backgroundColor: bgColor }, paddingStyle]}>
+          <View
+            style={[styles.sidebar, { backgroundColor: bgColor }, paddingStyle]}
+            pointerEvents="auto"
+          >
             <SafeAreaView>
               {children}
             </SafeAreaView>

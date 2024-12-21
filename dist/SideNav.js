@@ -72,7 +72,7 @@ var SideNav = function (_a) {
             opacity: (0, react_native_reanimated_1.withTiming)(state ? 1 : 0, { duration: validatedDuration }),
             pointerEvents: state ? 'auto' : 'none',
         };
-    }, [state, validatedDuration, validatedWidth, position]);
+    });
     /**
      * Overlay animation style
      * - Controls fade in/out effect for the overlay based on SideNav state
@@ -81,9 +81,21 @@ var SideNav = function (_a) {
         opacity: (0, react_native_reanimated_1.withTiming)(state ? validatedOverlayOpacity / 100 : 0, { duration: validatedDuration }),
         pointerEvents: state ? 'auto' : 'none'
     }); }, [state, validatedOverlayOpacity, validatedDuration]);
-    return (react_1.default.createElement(react_native_1.TouchableOpacity, { activeOpacity: 1, onPress: !overlay ? onOutsidePress : undefined, style: react_native_1.StyleSheet.absoluteFill },
-        overlay && (react_1.default.createElement(react_native_reanimated_1.default.View, { style: [overlayAnimatedStyle, styles.overlay] },
-            react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: onOutsidePress, style: styles.touchableOverlay }))),
+    return (react_1.default.createElement(react_native_1.View, { style: [
+            react_native_1.StyleSheet.absoluteFill,
+            { pointerEvents: 'box-none' }
+        ] },
+        overlay && (react_1.default.createElement(react_native_reanimated_1.default.View, { style: [overlayAnimatedStyle, styles.overlay], pointerEvents: state ? 'auto' : 'none', onTouchStart: function (e) {
+                var touch = e.nativeEvent;
+                var touchX = touch.pageX;
+                var sideNavWidth = (react_native_1.Dimensions.get('window').width * validatedWidth) / 100;
+                var touchIsOutsideSideNav = position === 'left'
+                    ? touchX > sideNavWidth
+                    : touchX < (react_native_1.Dimensions.get('window').width - sideNavWidth);
+                if (touchIsOutsideSideNav) {
+                    onOutsidePress();
+                }
+            } })),
         react_1.default.createElement(react_native_gesture_handler_1.PanGestureHandler, { onHandlerStateChange: (0, react_1.useCallback)(function (event) {
                 if (event.nativeEvent.state === react_native_gesture_handler_1.State.END && event.nativeEvent.translationX > 10) {
                     onOutsidePress();
@@ -97,8 +109,8 @@ var SideNav = function (_a) {
                     },
                     animatedStyle,
                     styles.sidebarContainer
-                ] },
-                react_1.default.createElement(react_native_1.View, { style: [styles.sidebar, { backgroundColor: bgColor }, paddingStyle] },
+                ], pointerEvents: "box-none" },
+                react_1.default.createElement(react_native_1.View, { style: [styles.sidebar, { backgroundColor: bgColor }, paddingStyle], pointerEvents: "auto" },
                     react_1.default.createElement(react_native_safe_area_context_1.SafeAreaView, null, children))))));
 };
 var styles = react_native_1.StyleSheet.create({
