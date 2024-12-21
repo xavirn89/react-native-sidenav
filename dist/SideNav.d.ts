@@ -3,7 +3,7 @@ type Padding = number | [number, number] | [number, number, number, number];
 /**
  * Props for the SideNav component:
  * - `state` (boolean): Controls whether the SideNav is open (true) or closed (false).
- * - `toggle` (function): Function to toggle the SideNav open/close state.
+ * - `onOutsidePress` (function): Function to toggle the SideNav open/close state.
  * - `position` ('left' | 'right'): Position of the SideNav on the screen.
  * - `widthPercentage` (number): Width of the SideNav as a percentage of the screen width.
  *   Default is 50.
@@ -22,7 +22,7 @@ type Padding = number | [number, number] | [number, number, number, number];
  */
 interface SideNavProps {
     state: boolean;
-    toggle: () => void;
+    onOutsidePress: () => void;
     position: 'left' | 'right';
     widthPercentage?: number;
     overlay?: boolean;

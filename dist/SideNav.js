@@ -29,7 +29,7 @@ var react_native_reanimated_1 = __importStar(require("react-native-reanimated"))
 var react_native_safe_area_context_1 = require("react-native-safe-area-context");
 var react_native_gesture_handler_1 = require("react-native-gesture-handler");
 var SideNav = function (_a) {
-    var state = _a.state, toggle = _a.toggle, position = _a.position, _b = _a.widthPercentage, widthPercentage = _b === void 0 ? 50 : _b, _c = _a.overlay, overlay = _c === void 0 ? true : _c, _d = _a.overlayOpacity, overlayOpacity = _d === void 0 ? 50 : _d, _e = _a.animationDuration, animationDuration = _e === void 0 ? 200 : _e, _f = _a.bgColor, bgColor = _f === void 0 ? 'white' : _f, _g = _a.padding, padding = _g === void 0 ? 16 : _g, _h = _a.isTabs, isTabs = _h === void 0 ? false : _h, children = _a.children;
+    var state = _a.state, onOutsidePress = _a.onOutsidePress, position = _a.position, _b = _a.widthPercentage, widthPercentage = _b === void 0 ? 50 : _b, _c = _a.overlay, overlay = _c === void 0 ? true : _c, _d = _a.overlayOpacity, overlayOpacity = _d === void 0 ? 50 : _d, _e = _a.animationDuration, animationDuration = _e === void 0 ? 200 : _e, _f = _a.bgColor, bgColor = _f === void 0 ? 'white' : _f, _g = _a.padding, padding = _g === void 0 ? 16 : _g, _h = _a.isTabs, isTabs = _h === void 0 ? false : _h, children = _a.children;
     // Retrieve safe area insets for consistent spacing
     var insets = (0, react_native_safe_area_context_1.useSafeAreaInsets)();
     var screenWidth = react_native_1.Dimensions.get('window').width;
@@ -81,14 +81,14 @@ var SideNav = function (_a) {
         opacity: (0, react_native_reanimated_1.withTiming)(state ? validatedOverlayOpacity / 100 : 0, { duration: validatedDuration }),
         pointerEvents: state ? 'auto' : 'none'
     }); }, [state, validatedOverlayOpacity, validatedDuration]);
-    return (react_1.default.createElement(react_1.default.Fragment, null,
+    return (react_1.default.createElement(react_native_1.TouchableOpacity, { activeOpacity: 1, onPress: !overlay ? onOutsidePress : undefined, style: react_native_1.StyleSheet.absoluteFill },
         overlay && (react_1.default.createElement(react_native_reanimated_1.default.View, { style: [overlayAnimatedStyle, styles.overlay] },
-            react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: toggle, style: styles.touchableOverlay }))),
+            react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: onOutsidePress, style: styles.touchableOverlay }))),
         react_1.default.createElement(react_native_gesture_handler_1.PanGestureHandler, { onHandlerStateChange: (0, react_1.useCallback)(function (event) {
                 if (event.nativeEvent.state === react_native_gesture_handler_1.State.END && event.nativeEvent.translationX > 10) {
-                    toggle();
+                    onOutsidePress();
                 }
-            }, [toggle]) },
+            }, [onOutsidePress]) },
             react_1.default.createElement(react_native_reanimated_1.default.View, { style: [
                     {
                         width: "".concat(validatedWidth, "%"),

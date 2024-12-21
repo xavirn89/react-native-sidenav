@@ -1,6 +1,6 @@
 {
   "name": "@xavirn/react-native-sidenav",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A customizable SideNav component for React Native with TypeScript support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
